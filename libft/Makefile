@@ -75,7 +75,9 @@ SRC =	ft_strlen.c \
 		ft_normword.c \
 		ft_strrev.c \
 		ft_itoc.c \
-		get_next_line.c
+		get_next_line.c \
+		ft_strpart.c \
+		ft_printarr.c
 	
 OBJ =	$(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror

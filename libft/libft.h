@@ -105,5 +105,7 @@ char				*ft_normword(char const *s);
 int					ft_cntword(char const *s);
 char				*ft_strrev(char const *s);
 char				ft_itoc(const unsigned char value, const bool is_uppercase);
+char 				*ft_strpart(const char *str, int start, int length);
+void				ft_printarr(char **arr);
 
 #endif
