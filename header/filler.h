@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 21:55:12 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/04 12:43:58 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/04 16:14:20 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ typedef struct	s_map
 
 t_map		g_map;
 char		g_mymark;
+t_coo		*g_points;
+int			g_cnt_points;
 
 #endif

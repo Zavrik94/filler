@@ -57,9 +57,9 @@ void	start_input(void)
 		if (ft_strstr(line, "azavrazh"))
 		{
 			if (ft_strstr(line, "p1"))
-				g_mymark = 'o';
+				g_mymark = 'O';
 			else if ((ft_strstr(line, "p2")))
-				g_mymark = 'x';
+				g_mymark = 'X';
 		}
 	}
 }
