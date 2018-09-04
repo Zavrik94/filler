@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 20:12:40 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/04 13:04:03 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/04 20:21:19 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ char				ft_itoc(const unsigned char value, const bool is_uppercase);
 char 				*ft_strpart(const char *str, int start, int length);
 void				ft_printarr(char **arr);
 char				**ft_copyarr(char **arr);
+void				ft_printnumbarr(int **arr, int x, int y);
 
 #endif

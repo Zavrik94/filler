@@ -6,7 +6,7 @@
 #    By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/07 18:42:49 by azavrazh          #+#    #+#              #
-#    Updated: 2018/09/04 13:03:32 by azavrazh         ###   ########.fr        #
+#    Updated: 2018/09/04 20:02:06 by azavrazh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,8 @@ SRC =	ft_strlen.c \
 		get_next_line.c \
 		ft_strpart.c \
 		ft_printarr.c \
-		ft_copyarr.c
+		ft_copyarr.c \
+		ft_printnumbarr.c
 	
 OBJ =	$(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror

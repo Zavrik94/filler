@@ -57,9 +57,15 @@ void	start_input(void)
 		if (ft_strstr(line, "azavrazh"))
 		{
 			if (ft_strstr(line, "p1"))
-				g_mymark = 'O';
+			{
+				g_map.mymark = 'O';
+				g_map.enmark = 'X';
+			}
 			else if ((ft_strstr(line, "p2")))
-				g_mymark = 'X';
+			{
+				g_map.mymark = 'X';
+				g_map.enmark = 'O';
+			}
 		}
 	}
 }

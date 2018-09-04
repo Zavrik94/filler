@@ -6,7 +6,7 @@
 #    By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/03 19:38:02 by azavrazh          #+#    #+#              #
-#    Updated: 2018/09/04 12:41:54 by azavrazh         ###   ########.fr        #
+#    Updated: 2018/09/04 19:29:18 by azavrazh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CC := clang
 CFLAGS := -g #-Wall -Wextra -Werror
 IFLAGS := -I $(INC_D)
 
-SRC := filler input algo
+SRC := filler input algo work_with_map
 HFILES := $(INC_D)filler.h
 
 SRCS := $(addprefix $(SRC_D), $(addsuffix .c, $(SRC)))
