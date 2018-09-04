@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: azavrazh <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/07 18:42:49 by azavrazh          #+#    #+#              #
-#    Updated: 2017/12/15 00:10:02 by azavrazh         ###   ########.fr        #
+#    Updated: 2018/09/04 13:03:32 by azavrazh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,8 @@ SRC =	ft_strlen.c \
 		ft_itoc.c \
 		get_next_line.c \
 		ft_strpart.c \
-		ft_printarr.c
+		ft_printarr.c \
+		ft_copyarr.c
 	
 OBJ =	$(SRC:.c=.o)
 CFLAGS = -Wall -Wextra -Werror

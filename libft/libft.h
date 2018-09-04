@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azavrazh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 20:12:40 by azavrazh          #+#    #+#             */
-/*   Updated: 2017/12/14 16:17:48 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/04 13:04:03 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ char				*ft_strrev(char const *s);
 char				ft_itoc(const unsigned char value, const bool is_uppercase);
 char 				*ft_strpart(const char *str, int start, int length);
 void				ft_printarr(char **arr);
+char				**ft_copyarr(char **arr);
 
 #endif

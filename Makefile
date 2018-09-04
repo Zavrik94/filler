@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: azavrazh <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/03 19:38:02 by azavrazh          #+#    #+#              #
-#    Updated: 2018/09/03 19:50:06 by azavrazh         ###   ########.fr        #
+#    Updated: 2018/09/04 12:41:54 by azavrazh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CC := clang
 CFLAGS := -g #-Wall -Wextra -Werror
 IFLAGS := -I $(INC_D)
 
-SRC := filler input
+SRC := filler input algo
 HFILES := $(INC_D)filler.h
 
 SRCS := $(addprefix $(SRC_D), $(addsuffix .c, $(SRC)))
@@ -31,14 +31,14 @@ OBJS := $(addprefix $(OBJ_D), $(SRCS:%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ_D) $(OBJS)
-	$(CC) $(CFLAGS) $(IFLAGS) $(LIBFT) $(OBJS) -o $(NAME)
-$(LIB):
+	$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(LIBFT):
 	make -C $(LIBFT_D)
 
 $(OBJ_D):
 	mkdir -p $(OBJ_D)$(SRC_D)
 $(OBJ_D)%.o: %.c $(HFILES)
-	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@ 
 
 clean: mclean
 	make clean -C $(LIBFT_D)
