@@ -1,5 +1,32 @@
 #include <filler.h>
 
+int		check_enermy_angle()
+{
+	int		x;
+	int		y;
+	int		my;
+	int		en;
+
+	my = 0;
+	en = 0;
+	y = -1;
+	while (g_map.map[++y])
+	{
+		x = -1;
+		while (g_map.map[y][++x])
+		{
+			if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == g_map.mymark + 32)
+				my += x + y;
+			if (g_map.map[y][x] == g_map.enmark || g_map.map[y][x] == g_map.enmark + 32)
+				en += x + y;
+		}
+	}
+	if (my >= en)
+		return (0);
+	else
+		return (1); 
+}
+
 int		check_dot_map(int **map)
 {
 	int		x;
@@ -20,7 +47,7 @@ int		cheat_coord(int	x, int mc)
 {
 	if (x - 1 <= 0)
 		return (mc + x);
-	else if (x + 1 > mc)
+	else
 		return (x - mc);
 	// if (z = '-')
 	// 	return((x - 1 > 0) ? x - 1 : mc - x);
@@ -94,6 +121,7 @@ int		**fill_map_numbers(void)
 	int		i;
 	int		x;
 	int		y;
+	int		angle;
 
 	map = (int**)malloc(sizeof(int*) * g_map.mc.y + 1);
 	map[g_map.mc.y] = NULL;
@@ -110,28 +138,36 @@ int		**fill_map_numbers(void)
 				map[i][x] = 0;
 		}
 	}
+	angle = check_enermy_angle();
+	// printf("andle = %d\n", angle);
 	while (check_dot_map(map))
 	{
-		y = g_map.mc.y;
-		while (--y > -1)
+		if (angle == 1)
 		{
-			x = g_map.mc.x;
-			while (--x > -1)
+			y = g_map.mc.y;
+			while (--y > -1)
 			{
-				map[y][x] = check_around_number(map, x , y);
-				if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == g_map.mymark + 32)
-					map[y][x] *= 2;
+				x = g_map.mc.x;
+				while (--x > -1)
+				{
+					map[y][x] = check_around_number(map, x , y);
+					if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == g_map.mymark + 32)
+						map[y][x] = -2;
+				}
 			}
 		}
-		// y = -1;
-		// while (++y < g_map.mc.y)
-		// {
-		// 	x = -1;
-		// 	while (++x < g_map.mc.x)
-		// 	{
-		// 		map[y][x] = check_around_number(map, x , y);
-		// 	}
-		// }
+		else
+		{
+			y = -1;
+			while (++y < g_map.mc.y)
+			{
+				x = -1;
+				while (++x < g_map.mc.x)
+				{
+					map[y][x] = check_around_number(map, x , y);
+				}
+			}
+		}
 	}
 	//ft_printnumbarr(map, g_map.mc.x, g_map.mc.y);
 	return (map);

@@ -18,7 +18,8 @@ int		calculate_piece(int	x, int y)
 		while (g_map.piece[py][++px])
 		{
 			if (g_map.piece[py][px] == '*')
-				res += g_num_map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)];
+				if (g_map.map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)] != g_map.mymark)
+					res += g_num_map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)];
 			fx++;
 		}
 		fy++;
@@ -99,7 +100,7 @@ void	check_around_point(int x, int y)
 			//printf("x = %d y = %d\n", xmin, ymin);
 			if (can_put_it(xmin, ymin) == 1) 
 			{
-				printf("x = %d, y = %d calc = %d\n", xmin, ymin, calculate_piece(xmin, ymin));
+				// printf("x = %d, y = %d calc = %d\n", xmin, ymin, calculate_piece(xmin, ymin));
 				if (calculate_piece(xmin, ymin) < g_map.bestsum)
 				{
 					g_map.bestsum = calculate_piece(xmin, ymin);
@@ -157,7 +158,7 @@ void	filler_algo(void)
 	//'O' = 'o' - 32;
 	g_num_map = fill_map_numbers();
 	g_map.bestsum = sum_all_map();
-	ft_printnumbarr(g_num_map, g_map.mc.x, g_map.mc.y);
+	// ft_printnumbarr(g_num_map, g_map.mc.x, g_map.mc.y);
 	findpos();
 	// printf("%d %d\n", g_map.best.y, g_map.best.x);
 	// fflush(stdout);
