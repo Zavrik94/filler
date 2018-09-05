@@ -3,7 +3,7 @@
 
 int		main(void)
 {
-	start_input();
-	filler_algo();
+	if (start_input() == 1)
+		filler_algo();
 	return (0);
 }

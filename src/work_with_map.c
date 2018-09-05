@@ -6,55 +6,102 @@ int		check_dot_map(int **map)
 	int		y;
 
 	y = -1;
-	while (map[++y])
+	while (++y < g_map.mc.y)
 	{
 		x = -1;
-		while (map[y][++x])
+		while (++x < g_map.mc.x)
 			if (map[y][x] == -1)
 				return (1);
 	}
 	return (0);
 }
 
+int		cheat_coord(int	x, int mc)
+{
+	if (x - 1 <= 0)
+		return (mc + x);
+	else if (x + 1 > mc)
+		return (x - mc);
+	// if (z = '-')
+	// 	return((x - 1 > 0) ? x - 1 : mc - x);
+	// else
+	// 	return ((x + 1 < mc) ? x + 1 : mc - x);
+}
+
 int		check_around_number(int	**map, int	x, int y)
 {
 	int		minx;
 	int		miny;
-	int		maxx;
-	int		maxy;
-	int		res;
+	int		i;
+	int		c;
+	int		min;
+	int		ischange;
 
-	miny = y - 1 > 0 ? y - 1 : 0;
-	res = 0;
-	maxx = x + 1 < g_map.mc.x ? x + 1 : g_map.mc.x;
-	maxy = y + 1 < g_map.mc.y ? y + 1 : g_map.mc.y;
-	while (miny <= maxy)
+	miny = y - 1;
+	minx = x - 1;
+	min = 10000000;
+	ischange = 0;
+	i = -1;
+	// ft_printnumbarr(map, g_map.mc.x, g_map.mc.y);
+	// write(1, "\n", 1);
+	if (map[y][x] == 0)
+		return (0);
+	//if (x == 17 && y == 1)
+		//printf("g_map.mc.y = %d x = %d y = %d maxx = %d miny = %d maxy = %d\n",g_map.mc.y, x , y, maxx, miny, maxy);
+	
+//map[(minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x) : minx + x
+	while (++i < 3)
 	{
-		minx = x - 1 > 0 ? x - 1 : 0;
-		while (minx <= maxx)
+		c = -1;
+		while (++c < 3)
 		{
-			if (map[miny][minx] )
-			minx++;
+			// printf("x = %d y = %d yc = %d xc = %d\n",x, y, (miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny +i, g_map.mc.y) : miny + i, (minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x) : minx + c);
+			if (map[(miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny + i, g_map.mc.y) : miny + i][(minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x) : minx + c] < min && map[(miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny +i, g_map.mc.y) : miny + i][(minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x) : minx + c] > -1) 
+			{
+				ischange = 1;
+				min = map[(miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny + i, g_map.mc.y) : miny + i][(minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x) : minx + c];
+				// printf("min = %d", min);
+			}
 		}
-		miny++;
+		// printf("\n");
 	}
-	return (0);
+	// printf("\n\n");
+	// if (map[CHEATDWN(y, 0)][CHEATDWN(x, 0)] < min && map[CHEATDWN(y, 0)][CHEATDWN(x, 0)] > -1 && (ischange = 1) > 0 )
+	// 	min = map[CHEATDWN(y, 0)][CHEATDWN(x, 0)];
+	// if (map[CHEATDWN(y, 0)][x] < min && map[CHEATDWN(y, 0)][x] > -1 && (ischange = 1) > 0 )
+	// 	min = map[CHEATDWN(y, 0)][x];
+	// if (map[CHEATDWN(y, 0)][CHEATUP(x, g_map.mc.x)] < min && map[CHEATDWN(y, 0)][CHEATUP(x, g_map.mc.x)] > -1 && (ischange = 1) > 0 )
+	// 	min = map[CHEATDWN(y, 0)][CHEATUP(x, g_map.mc.x)];
+	// if (map[y][CHEATDWN(x, 0)] < min && map[y][CHEATDWN(x, 0)] > -1 && (ischange = 1) > 0 )
+	// 	min = map[y][CHEATDWN(x, 0)];
+	// if (map[y][CHEATUP(x, g_map.mc.x)] < min && map[y][CHEATUP(x, g_map.mc.x)] > -1 && (ischange = 1) > 0 )
+	// 	min = map[y][CHEATUP(x, g_map.mc.x)];
+	// if (map[CHEATUP(y, g_map.mc.y)][CHEATDWN(x, 0)] < min && map[CHEATUP(y, g_map.mc.y)][CHEATDWN(x, 0)] > -1 && (ischange = 1) > 0 )
+	// 	min = map[CHEATUP(y, g_map.mc.y)][CHEATDWN(x, 0)];
+	// if (map[CHEATUP(y, g_map.mc.y)][x] < min && map[CHEATUP(y, g_map.mc.y)][x] > -1 && (ischange = 1) > 0 )
+	// 	min = map[CHEATUP(y, g_map.mc.y)][x];
+	// if (map[CHEATUP(y, g_map.mc.y)][CHEATUP(x, g_map.mc.x)] < min && map[CHEATUP(y, g_map.mc.y)][CHEATUP(x, g_map.mc.x)] > -1 && (ischange = 1) > 0 )
+	// 	min = map[CHEATUP(y, g_map.mc.y)][CHEATUP(x, g_map.mc.x)];
+	if (ischange)
+		return (min + 1);
+	else
+		return (-1);	
 }
 
-void	fill_map_numbers(void)
+int		**fill_map_numbers(void)
 {
 	int		**map;
 	int		i;
 	int		x;
 	int		y;
 
-	map = (int**)malloc(sizeof(int*) * g_map.mc.y);
+	map = (int**)malloc(sizeof(int*) * g_map.mc.y + 1);
 	map[g_map.mc.y] = NULL;
 	i = -1;
 	while (g_map.map[++i])
 	{
 		x = -1;
-		map[i] = (int*)malloc(sizeof(int) * g_map.mc.x);
+		map[i] = (int*)malloc((int)4 * g_map.mc.x);
 		while (g_map.map[i][++x])
 		{
 			if (g_map.map[i][x] != g_map.enmark && g_map.map[i][x] != g_map.enmark + 32)
@@ -65,14 +112,27 @@ void	fill_map_numbers(void)
 	}
 	while (check_dot_map(map))
 	{
-		y = -1;
-		while (map[++y])
+		y = g_map.mc.y;
+		while (--y > -1)
 		{
-			x = -1;
-			while (map[y][++x])
+			x = g_map.mc.x;
+			while (--x > -1)
 			{
-			} 
+				map[y][x] = check_around_number(map, x , y);
+				if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == g_map.mymark + 32)
+					map[y][x] *= 2;
+			}
 		}
+		// y = -1;
+		// while (++y < g_map.mc.y)
+		// {
+		// 	x = -1;
+		// 	while (++x < g_map.mc.x)
+		// 	{
+		// 		map[y][x] = check_around_number(map, x , y);
+		// 	}
+		// }
 	}
 	//ft_printnumbarr(map, g_map.mc.x, g_map.mc.y);
+	return (map);
 }

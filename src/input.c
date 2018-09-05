@@ -44,10 +44,12 @@ void	input_piece(char *line)
 	}
 }
 
-void	start_input(void)
+int		start_input(void)
 {
 	char *line;
+	int		i;
 
+	i = 0;
 	while (get_next_line(0, &line) > 0)
 	{
 		if (ft_strstr(line, "Plateau"))
@@ -67,5 +69,10 @@ void	start_input(void)
 				g_map.enmark = 'O';
 			}
 		}
+		i++;
 	}
+	if (i == 0)
+		return (0);
+	else
+		return (1);	
 }

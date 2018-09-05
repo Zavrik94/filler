@@ -8,7 +8,7 @@ void	ft_printnumbarr(int **arr, int	x, int y)
 	size_t	cur_len;
 
 	i = -1;
-	max_len = 0;
+	max_len = 2;
 	while (arr[++i])
 	{
 		c = -1;
