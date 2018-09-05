@@ -1,1 +1,6 @@
-seed = 2753
+seed = 3113
+X: error on input
+./azavrazh.filler: Segfault at 1
+players/abanlin.filler won
+Score:
+159AGAINST1

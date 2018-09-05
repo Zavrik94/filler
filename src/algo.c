@@ -91,7 +91,7 @@ void	check_around_point(int x, int y)
 	xmin = x - g_map.pc.x + 1;//(x - g_map.pc.x + 1 > 0) ? x - g_map.pc.x + 1 : 0;
 	ymax = y;//y + g_map.pc.y - 1 > g_map.mc.y ? g_map.mc.y : y + g_map.pc.y - 1;
 	xmax = x;//x + g_map.pc.x - 1 > g_map.mc.x ? g_map.mc.x : x + g_map.pc.x - 1;
-	//printf("ymin = %d xmin = %d ymax = %d xmax = %d\n", ymin, xmin, ymax, xmax);
+	// printf("ymin = %d xmin = %d ymax = %d xmax = %d\n", ymin, xmin, ymax, xmax);
 	while (ymin <= ymax)
 	{
 		xmin = x - g_map.pc.x + 1;//x - g_map.pc.x + 1 > 0 ? x - g_map.pc.x + 1 : 0;
@@ -125,7 +125,7 @@ void	findpos(void)
 	{
 		x = -1;
 		while (g_map.map[y][++x])
-			if (g_map.map[y][x] == g_map.mymark)
+			if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == g_map.mymark + 32)
 				check_around_point(x, y);
 				// if (can_put_it(x, y) == 1)
 				// {
@@ -154,14 +154,18 @@ int		sum_all_map()
 
 void	filler_algo(void)
 {
+	// dprintf(fd, "start algo\n");
 	//'X' = 'x' - 32;
 	//'O' = 'o' - 32;
+
 	g_num_map = fill_map_numbers();
 	g_map.bestsum = sum_all_map();
 	// ft_printnumbarr(g_num_map, g_map.mc.x, g_map.mc.y);
+	dprintf(fd, "before find pos\n");
 	findpos();
 	// printf("%d %d\n", g_map.best.y, g_map.best.x);
 	// fflush(stdout);
+	dprintf(fd, "x = %d y = %d\n", g_map.best.x, g_map.best.y);
 	ft_putnbr(g_map.best.y);
 	ft_putchar(' ');
 	ft_putnbr(g_map.best.x);

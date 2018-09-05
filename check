@@ -1,0 +1,19 @@
+start input plat
+end input plat
+start input piece
+end input piece
+before 1st write fill map numb
+after 1st write fill map numb
+before 2st write fill map numb
+end fill map numbers
+before find pos
+x = 14 y = 12
+start input plat
+end input plat
+start input piece
+end input piece
+before 1st write fill map numb
+after 1st write fill map numb
+before 2st write fill map numb
+end fill map numbers
+before find pos

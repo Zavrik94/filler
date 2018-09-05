@@ -43,12 +43,49 @@ int		check_dot_map(int **map)
 	return (0);
 }
 
-int		cheat_coord(int	x, int mc)
+int		cheat_coord(int	x, int mc, int status)
 {
-	if (x - 1 <= 0)
-		return (mc + x);
+	int angle;
+
+	angle = check_enermy_angle();
+	if (status == 0)
+	{
+		if (x - 1 <= 0)
+			return (mc + x);
+		else
+			return (x - mc);
+		// if (angle == 0)
+		// {
+		// 	if (x - 1 <= 0) 
+		// 		return (mc + x);
+		// 	else
+		// 		return (mc - 1);
+		// }
+		// else
+		// {
+		// 	if (x - 1 <= 0)
+		// 		return (0);
+		// 	else
+		// 		return (x - mc);
+		// }
+	}
 	else
-		return (x - mc);
+	{
+		if (angle == 0)
+		{
+			if (x - 1 <= 0)
+				return (mc + x);
+			else
+				return (mc - 1);
+		}
+		else
+		{
+			if (x - 1 <= 0)
+				return (0);
+			else
+				return (x - mc);
+		}
+	}
 	// if (z = '-')
 	// 	return((x - 1 > 0) ? x - 1 : mc - x);
 	// else
@@ -82,11 +119,11 @@ int		check_around_number(int	**map, int	x, int y)
 		c = -1;
 		while (++c < 3)
 		{
-			// printf("x = %d y = %d yc = %d xc = %d\n",x, y, (miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny +i, g_map.mc.y) : miny + i, (minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x) : minx + c);
-			if (map[(miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny + i, g_map.mc.y) : miny + i][(minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x) : minx + c] < min && map[(miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny +i, g_map.mc.y) : miny + i][(minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x) : minx + c] > -1) 
+			// 	printf("x = %d y = %d yc = %d xc = %d\n",x, y, (miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny + i, g_map.mc.y, 1) : miny + i, (minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x, 0) : minx + c);
+			if (map[(miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny + i, g_map.mc.y, 1) : miny + i][(minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x, 0) : minx + c] < min && map[(miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny +i, g_map.mc.y, 1) : miny + i][(minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x, 0) : minx + c] > -1) 
 			{
 				ischange = 1;
-				min = map[(miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny + i, g_map.mc.y) : miny + i][(minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x) : minx + c];
+				min = map[(miny + i < 0 || miny + i >= g_map.mc.y) ? cheat_coord(miny + i, g_map.mc.y, 1) : miny + i][(minx + c < 0 || minx + c >= g_map.mc.x) ? cheat_coord(minx + c, g_map.mc.x, 0) : minx + c];
 				// printf("min = %d", min);
 			}
 		}
@@ -117,6 +154,7 @@ int		check_around_number(int	**map, int	x, int y)
 
 int		**fill_map_numbers(void)
 {
+	// dprintf(fd, "start fill map numb\n");
 	int		**map;
 	int		i;
 	int		x;
@@ -125,11 +163,12 @@ int		**fill_map_numbers(void)
 
 	map = (int**)malloc(sizeof(int*) * g_map.mc.y + 1);
 	map[g_map.mc.y] = NULL;
+	dprintf(fd, "before 1st write fill map numb\n");
 	i = -1;
 	while (g_map.map[++i])
 	{
 		x = -1;
-		map[i] = (int*)malloc((int)4 * g_map.mc.x);
+		map[i] = (int*)malloc(sizeof(int) * g_map.mc.x);
 		while (g_map.map[i][++x])
 		{
 			if (g_map.map[i][x] != g_map.enmark && g_map.map[i][x] != g_map.enmark + 32)
@@ -138,8 +177,10 @@ int		**fill_map_numbers(void)
 				map[i][x] = 0;
 		}
 	}
+	dprintf(fd, "after 1st write fill map numb\n");
 	angle = check_enermy_angle();
 	// printf("andle = %d\n", angle);
+	dprintf(fd, "before 2st write fill map numb\n");
 	while (check_dot_map(map))
 	{
 		if (angle == 1)
@@ -170,5 +211,6 @@ int		**fill_map_numbers(void)
 		}
 	}
 	//ft_printnumbarr(map, g_map.mc.x, g_map.mc.y);
+	dprintf(fd, "end fill map numbers\n");
 	return (map);
 }

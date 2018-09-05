@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 21:55:12 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/05 14:02:14 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/05 21:05:22 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ typedef struct	s_map
 
 t_map		g_map;
 int			**g_num_map;
+int			fd;
 
 #endif
