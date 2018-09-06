@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	ft_printnumbarr(int **arr, int	x, int y)
+void	ft_printnumbarr(int fd, int **arr, int	x, int y)
 {
 	int i;
 	int	c;
@@ -24,9 +24,9 @@ void	ft_printnumbarr(int **arr, int	x, int y)
 		{
 			cur_len = max_len - ft_strlen(ft_itoa(arr[i][c])) + 1;
 			while (--cur_len != 0)
-				ft_putchar(' ');
-			ft_putstr(ft_itoa(arr[i][c]));
+				ft_putchar_fd(' ', fd);
+			ft_putstr_fd(ft_itoa(arr[i][c]), fd);
 		}
-		ft_putchar('\n');
+		ft_putchar_fd('\n', fd);
 	}
 }

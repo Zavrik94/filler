@@ -1,6 +1,6 @@
-seed = 3113
-X: error on input
-./azavrazh.filler: Segfault at 1
-players/abanlin.filler won
+seed = 3734
+X: timedout
+input
+./abanlin.filler won
 Score:
-159AGAINST1
+0AGAINST0

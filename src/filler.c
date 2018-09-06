@@ -3,7 +3,7 @@
 
 void	input_plat(char *line)
 {
-	dprintf(fd, "start input plat\n");
+	// dprintf(fd, "start input plat\n");
 	int 	i;
 
 	i = -1;
@@ -15,19 +15,19 @@ void	input_plat(char *line)
 			g_map.mc.x = ft_atoi(line + i);
 	g_map.map = (char**)malloc(sizeof(char*) * (g_map.mc.y + 1));
 	get_next_line(0, &line);
-	g_map.map[g_map.mc.y + 1] = NULL;
+	g_map.map[g_map.mc.y] = NULL;
 	i = -1;
 	while (++i < g_map.mc.y)
 	{
 		get_next_line(0, &line);
 		g_map.map[i] = line + 4;
 	}
-	dprintf(fd, "end input plat\n");
+	// dprintf(fd, "end input plat\n");
 }
 
 void	input_piece(char *line)
 {
-	dprintf(fd, "start input piece\n");
+	// dprintf(fd, "start input piece\n");
 	int 	i;
 
 	i = -1;
@@ -45,7 +45,9 @@ void	input_piece(char *line)
 		get_next_line(0, &line);
 		g_map.piece[i] = line;
 	}
-	dprintf(fd, "end input piece\n");
+	// ft_printarr(g_map.piece);
+	cut_piece();
+	// dprintf(fd, "end input piece\n");
 }
 
 int		main(void)
@@ -76,7 +78,6 @@ int		main(void)
 				g_map.enmark = 'O';
 			}
 		}
-		free(line);
 	}
 	return (0);
 }

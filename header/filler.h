@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 21:55:12 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/05 21:05:22 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/06 12:13:11 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 
 # include "../libft/libft.h"
 # include <stdio.h>
-# define CHEAT(x, map) ((x) < 0) ? (x) + (map) : (x)
+# define CHEAT2(x, map) ((x) < 0) ? (x) + (map) : (map) - 1
+# define CHEAT(x, map) ((x) < 0) || (x) >= (map) ? (CHEAT2((x), (map))) : (x)
 # define CHEATUP(x, map) ((x) + 1 < (map)) ? (x) + 1 : (map)
 # define CHEATDWN(x, map) ((x) - 1 > (map)) ? (x) - 1 : (map)
 
+void	cut_piece(void);
 int		start_input(void);
 void	filler_algo(void);
 int		**fill_map_numbers(void);
+
 
 typedef struct s_coordinates t_coo;
 

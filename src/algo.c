@@ -37,10 +37,11 @@ int		can_put_it(int	x, int	y)
 	int		counter;
 	tmp_x = x;
 
-	// if (x + g_map.pc.x - 1 > g_map.mc.x)
-	// 	return (0);
-	// if (y + g_map.pc.y - 1 > g_map.mc.y)
-	// 	return (0);
+	if (x + g_map.pc.x > g_map.mc.x)
+	 	return (0);
+	if (y + g_map.pc.y > g_map.mc.y)
+		return (0);
+	// dprintf(fd, "start can put it on coord x = %d y = %d\n", x ,y);
 	fy = y;
 	py = 0;
 	counter = 0;
@@ -58,6 +59,7 @@ int		can_put_it(int	x, int	y)
 			// 	else
 			// 		return (0);
 			// }
+			// dprintf(fd, "checking cheat map x = %d y = %d\n", CHEAT(fy, g_map.mc.y), CHEAT(fx, g_map.mc.x));
 			if (g_map.map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)] != '.' && g_map.piece[py][px] == '*')
 			{
 				if (g_map.map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)] == g_map.enmark || g_map.map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)] == (g_map.enmark + 32))
@@ -87,6 +89,7 @@ void	check_around_point(int x, int y)
 	int		xmax;
 	int		ymax;
 
+	// dprintf(fd, "start check around point x = %d y = %d\n", x , y);
 	ymin = y - g_map.pc.y + 1;//(y - g_map.pc.y + 1 > 0) ? y - g_map.pc.y + 1 : 0;
 	xmin = x - g_map.pc.x + 1;//(x - g_map.pc.x + 1 > 0) ? x - g_map.pc.x + 1 : 0;
 	ymax = y;//y + g_map.pc.y - 1 > g_map.mc.y ? g_map.mc.y : y + g_map.pc.y - 1;
@@ -113,6 +116,7 @@ void	check_around_point(int x, int y)
 		}
 		ymin++;
 	}
+	// dprintf(fd, "end check around point\n");
 }
 
 void	findpos(void)
@@ -121,18 +125,23 @@ void	findpos(void)
 	int		y;
 
 	y = -1;
+	// dprintf(fd, "start find pos\n");
 	while (g_map.map[++y])
 	{
 		x = -1;
 		while (g_map.map[y][++x])
-			if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == g_map.mymark + 32)
+			if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == (g_map.mymark + 32))
+			{
+				// dprintf(fd, "before check around point map_char = %c\n", g_map.map[y][x]);
 				check_around_point(x, y);
+			}
 				// if (can_put_it(x, y) == 1)
 				// {
 				// 	g_points[g_cnt_points].x = x;
 				// 	g_points[g_cnt_points++].y = y;
 				// }
 	}
+	// dprintf(fd, "end find pos\n");
 }
 
 int		sum_all_map()
@@ -160,12 +169,15 @@ void	filler_algo(void)
 
 	g_num_map = fill_map_numbers();
 	g_map.bestsum = sum_all_map();
-	// ft_printnumbarr(g_num_map, g_map.mc.x, g_map.mc.y);
-	dprintf(fd, "before find pos\n");
+	// ft_printnumbarr(fd, g_num_map, g_map.mc.x, g_map.mc.y);
+	// ft_printarr_fd(fd, g_map.map);
+	// ft_printarr_fd(fd, g_map.piece);
+	// dprintf(fd, "mymark = %c enmark = %c\n", g_map.mymark, g_map.enmark);
+	// dprintf(fd, "before find pos\n");
 	findpos();
 	// printf("%d %d\n", g_map.best.y, g_map.best.x);
 	// fflush(stdout);
-	dprintf(fd, "x = %d y = %d\n", g_map.best.x, g_map.best.y);
+	// dprintf(fd, "x = %d y = %d\n", g_map.best.x, g_map.best.y);
 	ft_putnbr(g_map.best.y);
 	ft_putchar(' ');
 	ft_putnbr(g_map.best.x);

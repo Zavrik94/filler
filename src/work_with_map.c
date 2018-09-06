@@ -71,20 +71,11 @@ int		cheat_coord(int	x, int mc, int status)
 	}
 	else
 	{
-		if (angle == 0)
-		{
-			if (x - 1 <= 0)
-				return (mc + x);
-			else
-				return (mc - 1);
-		}
-		else
-		{
 			if (x - 1 <= 0)
 				return (0);
 			else
-				return (x - mc);
-		}
+				return (mc - 1);
+
 	}
 	// if (z = '-')
 	// 	return((x - 1 > 0) ? x - 1 : mc - x);
@@ -163,24 +154,26 @@ int		**fill_map_numbers(void)
 
 	map = (int**)malloc(sizeof(int*) * g_map.mc.y + 1);
 	map[g_map.mc.y] = NULL;
-	dprintf(fd, "before 1st write fill map numb\n");
+	// dprintf(fd, "before 1st while fill map numb\n");
 	i = -1;
 	while (g_map.map[++i])
 	{
 		x = -1;
+		// dprintf(fd, "in 1s while fill map numb i = %d\n", i);
 		map[i] = (int*)malloc(sizeof(int) * g_map.mc.x);
 		while (g_map.map[i][++x])
 		{
+			// dprintf(fd, "in 1st while anoter while fill map numb x = %d\n", x);
 			if (g_map.map[i][x] != g_map.enmark && g_map.map[i][x] != g_map.enmark + 32)
 				map[i][x] = -1;
 			else
 				map[i][x] = 0;
 		}
 	}
-	dprintf(fd, "after 1st write fill map numb\n");
+	// dprintf(fd, "after 1st while fill map numb\n");
 	angle = check_enermy_angle();
 	// printf("andle = %d\n", angle);
-	dprintf(fd, "before 2st write fill map numb\n");
+	// dprintf(fd, "before 2st while fill map numb\n");
 	while (check_dot_map(map))
 	{
 		if (angle == 1)
@@ -210,7 +203,7 @@ int		**fill_map_numbers(void)
 			}
 		}
 	}
-	//ft_printnumbarr(map, g_map.mc.x, g_map.mc.y);
-	dprintf(fd, "end fill map numbers\n");
+	// ft_printnumbarr(1, map, g_map.mc.x, g_map.mc.y);
+	// dprintf(fd, "end fill map numbers\n");
 	return (map);
 }
