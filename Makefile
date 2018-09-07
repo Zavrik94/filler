@@ -6,7 +6,7 @@
 #    By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/03 19:38:02 by azavrazh          #+#    #+#              #
-#    Updated: 2018/09/06 12:13:23 by azavrazh         ###   ########.fr        #
+#    Updated: 2018/09/07 20:00:59 by azavrazh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,22 @@ HFILES := $(INC_D)filler.h
 SRCS := $(addprefix $(SRC_D), $(addsuffix .c, $(SRC)))
 OBJS := $(addprefix $(OBJ_D), $(SRCS:%.c=%.o))
 
+VNAME := azavrazh.vis
+VHFILES := $(INC_D)visualizer.h
+VIS := visualizer
+VSRCS := $(addprefix $(SRC_D), $(addsuffix .c, $(VIS)))
+VOBJS := $(addprefix $(OBJ_D), $(VSRCS:%.c=%.o))
+
+
 all: $(NAME)
+
+vis: $(OBJ_D) aaa #$(VOBJS)
+	$(CC) $(CFLAGS) $(IFLAGS) $(VOBJS) $(LIBFT) -lncurses -o $(VNAME)
+aaa:
+	$(CC) $(CFLAGS) $(IFLAGS) -c $(VSRCS) -o $(VOBJS)
+
+# $(OBJ_D)%.o: %.c $(VHFILES)
+# 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@ 
 
 $(NAME): $(LIBFT) $(OBJ_D) $(OBJS)
 	$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
@@ -39,6 +54,7 @@ $(OBJ_D):
 	mkdir -p $(OBJ_D)$(SRC_D)
 $(OBJ_D)%.o: %.c $(HFILES)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@ 
+
 
 clean: mclean
 	make clean -C $(LIBFT_D)

@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   filler.h                                           :+:      :+:    :+:   */
+/*   visualizer.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 21:55:12 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/07 19:13:24 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/07 21:59:45 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLER_H
-# define FILLER_H
+#ifndef VISUZLIZER_H
+# define VISUZLIZER_H
 
 # include "../libft/libft.h"
-# include <stdio.h>
-# define CHEAT2(x, map) ((x) < 0) ? (x) + (map) : (x) - (map) + 1
-# define CHEAT(x, map) ((x) < 0) || (x) >= (map) ? (CHEAT2((x), (map))) : (x)
+# include <ncurses.h>
+# include <time.h>
+// # define COMMON_HEIGHT		
 
-void	cut_piece(void);
-int		start_input(void);
-void	filler_algo(void);
-int		**fill_map_numbers(void);
-
+#include <stdio.h>
 
 typedef struct s_coordinates t_coo;
 
@@ -35,17 +31,19 @@ struct s_coordinates
 typedef struct	s_map
 {
 	t_coo	mc;
-	t_coo	pc;
 	char	**map;
-	char	**piece;
-	char	mymark;
-	char	enmark;
-	t_coo	best;
-	int		bestsum;
+
 }				t_map;
 
-t_map		g_map;
-int			**g_num_map;
-int			fd;
+enum	PLAYER_COLORS
+{
+	P1,
+	P2,
+	NEU
+};
+
+t_map			g_map;
+
+int				fd;
 
 #endif

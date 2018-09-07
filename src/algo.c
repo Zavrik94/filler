@@ -41,7 +41,6 @@ int		can_put_it(int	x, int	y)
 	 	return (0);
 	if (y + g_map.pc.y > g_map.mc.y)
 		return (0);
-	// dprintf(fd, "start can put it on coord x = %d y = %d\n", x ,y);
 	fy = y;
 	py = 0;
 	counter = 0;
@@ -51,20 +50,10 @@ int		can_put_it(int	x, int	y)
 		px = 0;
 		while (fx < x + g_map.pc.x)
 		{
-			// printf("xmap = %d ymap = %d xpiece = %d piece = %d map = %c piece = %c\n",fx, fy, px, py, g_map.map[fy][fx], g_map.piece[py][px]);
-			// if (g_map.map[fy < 0 ? fy + g_map.mc.y : fy][fx < 0 ? fx + g_map.mc.x : fx] != '.' && g_map.piece[py][px] == '*')
-			// {
-			// 	if (counter == 0 && g_map.map[fy < 0 ? fy + g_map.mc.y : fy][fx < 0 ? fx + g_map.mc.x : fx] == g_map.mymark)
-			// 		counter++;
-			// 	else
-			// 		return (0);
-			// }
-			// dprintf(fd, "checking cheat map x = %d y = %d\n", CHEAT(fy, g_map.mc.y), CHEAT(fx, g_map.mc.x));
 			if (g_map.map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)] != '.' && g_map.piece[py][px] == '*')
 			{
 				if (g_map.map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)] == g_map.enmark || g_map.map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)] == (g_map.enmark + 32))
 					return (0);
-				// printf("%c\n",g_map.map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)]);
 				if (counter == 0 && (g_map.map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)] == g_map.mymark || g_map.map[CHEAT(fy, g_map.mc.y)][CHEAT(fx, g_map.mc.x)] == g_map.mymark + 32))
 					counter++;
 				else
@@ -171,7 +160,8 @@ void	filler_algo(void)
 	g_map.bestsum = sum_all_map();
 	// ft_printnumbarr(fd, g_num_map, g_map.mc.x, g_map.mc.y);
 	// ft_printarr_fd(fd, g_map.map);
-	// ft_printarr_fd(fd, g_map.piece);
+	// ft_printarr(g_map.piece);
+	// printf("x = %d y = %d\n", g_map.pc.x, g_map.pc.y);
 	// dprintf(fd, "mymark = %c enmark = %c\n", g_map.mymark, g_map.enmark);
 	// dprintf(fd, "before find pos\n");
 	findpos();

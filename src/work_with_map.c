@@ -173,7 +173,7 @@ int		**fill_map_numbers(void)
 	// dprintf(fd, "after 1st while fill map numb\n");
 	angle = check_enermy_angle();
 	// printf("andle = %d\n", angle);
-	// dprintf(fd, "before 2st while fill map numb\n");
+	// printf("before 2st while fill map numb\n");
 	while (check_dot_map(map))
 	{
 		if (angle == 1)
@@ -185,8 +185,8 @@ int		**fill_map_numbers(void)
 				while (--x > -1)
 				{
 					map[y][x] = check_around_number(map, x , y);
-					if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == g_map.mymark + 32)
-						map[y][x] = -2;
+					// if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == g_map.mymark + 32)
+					// 	map[y][x] = -2;
 				}
 			}
 		}
@@ -203,7 +203,9 @@ int		**fill_map_numbers(void)
 			}
 		}
 	}
+	// ft_printnumbarr(fd, map, g_map.mc.x, g_map.mc.y);
+	// dprintf(fd, "\n\n");
 	// ft_printnumbarr(1, map, g_map.mc.x, g_map.mc.y);
-	// dprintf(fd, "end fill map numbers\n");
+	// printf("end fill  . /map numbers\n");
 	return (map);
 }

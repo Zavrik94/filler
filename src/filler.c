@@ -1,10 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   filler.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/07 19:01:38 by azavrazh          #+#    #+#             */
+/*   Updated: 2018/09/07 19:01:52 by azavrazh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <filler.h>
 
 void	input_plat(char *line)
 {
-	// dprintf(fd, "start input plat\n");
-	int 	i;
+	int		i;
 
 	i = -1;
 	g_map.mc.y = 0;
@@ -22,13 +32,11 @@ void	input_plat(char *line)
 		get_next_line(0, &line);
 		g_map.map[i] = line + 4;
 	}
-	// dprintf(fd, "end input plat\n");
 }
 
 void	input_piece(char *line)
 {
-	// dprintf(fd, "start input piece\n");
-	int 	i;
+	int		i;
 
 	i = -1;
 	g_map.pc.y = 0;
@@ -45,19 +53,14 @@ void	input_piece(char *line)
 		get_next_line(0, &line);
 		g_map.piece[i] = line;
 	}
-	// ft_printarr(g_map.piece);
-	cut_piece();
-	// dprintf(fd, "end input piece\n");
 }
 
 int		main(void)
 {
-	// dup2(open("test", O_RDONLY), 0);
 	char *line;
 
 	fd = open("check", O_RDWR);
 	while (get_next_line(0, &line) > 0)
-	{
 		if (ft_strstr(line, "Plateau"))
 			input_plat(line);
 		else if (ft_strstr(line, "Piece"))
@@ -78,6 +81,5 @@ int		main(void)
 				g_map.enmark = 'O';
 			}
 		}
-	}
 	return (0);
 }
