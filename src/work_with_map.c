@@ -4,24 +4,27 @@ int		check_enermy_angle()
 {
 	int		x;
 	int		y;
-	int		my;
-	int		en;
+	t_coo	en;
+	int		cnt;
 
-	my = 0;
-	en = 0;
+	en.x = 0;
+	en.y = 0;
+	cnt = 0;
 	y = -1;
 	while (g_map.map[++y])
 	{
 		x = -1;
 		while (g_map.map[y][++x])
-		{
-			if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == g_map.mymark + 32)
-				my += x + y;
 			if (g_map.map[y][x] == g_map.enmark || g_map.map[y][x] == g_map.enmark + 32)
-				en += x + y;
-		}
+			{
+				en.x += x;
+				en.y += y;
+				cnt++;
+			}
 	}
-	if (my >= en)
+	en.x /= cnt;
+	en.y /= cnt;
+	if (y >= (g_map.mc.y - 1) * (en.x - (g_map.mc.x - 1)) / g_map.mc.x)
 		return (0);
 	else
 		return (1); 
@@ -185,6 +188,11 @@ int		**fill_map_numbers(void)
 				while (--x > -1)
 				{
 					map[y][x] = check_around_number(map, x , y);
+					if (map[y][x] != -1)
+						{
+							y = g_map.mc.y--;
+							x = g_map.mc.x; 
+						}
 					// if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == g_map.mymark + 32)
 					// 	map[y][x] = -2;
 				}
@@ -199,6 +207,11 @@ int		**fill_map_numbers(void)
 				while (++x < g_map.mc.x)
 				{
 					map[y][x] = check_around_number(map, x , y);
+					if (map[y][x] != -1)
+						{
+							y = 0;
+							x = -1; 
+						}
 				}
 			}
 		}
