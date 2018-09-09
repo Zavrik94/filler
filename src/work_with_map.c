@@ -165,9 +165,9 @@ int		**fill_around_points(int x, int y, int **map)
 			c = -1;
 			while (++c < 3)
 			{
-				dprintf(fd, "x = %d y = %d\n map = %d", x + c, y + i,map[y + i][x + c]);
-				ft_printnumbarr(fd, map, g_map.mc.x, g_map.mc.y);
-				dprintf(fd, "\n\n");
+				dprintf(fd, "x = %d y = %d map = %d\n", x + c, y + i,map[y + i][x + c]);
+				// ft_printnumbarr(fd, map, g_map.mc.x, g_map.mc.y);
+				// dprintf(fd, "\n\n");
 				if (map[y + i][x + c] == -1)
 				{
 					// dprintf(fd, "x = %d y = %d\n", x + c, y + i);
@@ -210,8 +210,10 @@ int		**fill_map_numbers(void)
 	angle = check_enermy_angle();
 	// printf("andle = %d\n", angle);
 	// printf("before 2st while fill map numb\n");
-	while (check_dot_map(map))
-	{
+	// while (check_dot_map(map))
+	// {
+		// ft_printnumbarr(fd, map, g_map.mc.x, g_map.mc.y);
+		// dprintf(fd, "\n\n");
 		if (angle == 1)
 		{
 			y = g_map.mc.y;
@@ -219,18 +221,14 @@ int		**fill_map_numbers(void)
 			{
 				x = g_map.mc.x;
 				while (--x > -1)
-				{
 					map[y][x] = check_around_number(map, x , y);
-					// if (map[y][x] != -1)
-					// 	map = fill_around_points(x, y, map);
-					// if (map[y][x] != -1)
-					// 	{
-					// 		y = g_map.mc.y--;
-					// 		x = g_map.mc.x; 
-					// 	}
-					// if (g_map.map[y][x] == g_map.mymark || g_map.map[y][x] == g_map.mymark + 32)
-					// 	map[y][x] = -2;
-				}
+			}
+			y = -1;
+			while (++y < g_map.mc.y)
+			{
+				x = -1;
+				while (++x < g_map.mc.x)
+					map[y][x] = check_around_number(map, x , y);
 			}
 		}
 		else
@@ -240,21 +238,19 @@ int		**fill_map_numbers(void)
 			{
 				x = -1;
 				while (++x < g_map.mc.x)
-				{
 					map[y][x] = check_around_number(map, x , y);
-					// if (map[y][x] != -1)
-					// 	map = fill_around_points(x, y, map);
-					// if (map[y][x] != -1)
-					// 	{
-					// 		y = 0;
-					// 		x = -1; 
-					// 	}
-				}
+			}
+			y = g_map.mc.y;
+			while (--y > -1)
+			{
+				x = g_map.mc.x;
+				while (--x > -1)
+					map[y][x] = check_around_number(map, x , y);
 			}
 		}
-	}
-	// ft_printnumbarr(fd, map, g_map.mc.x, g_map.mc.y);
-	// dprintf(fd, "\n\n");
+	// }
+	ft_printnumbarr(fd, map, g_map.mc.x, g_map.mc.y);
+	dprintf(fd, "\n\n");
 	// ft_printnumbarr(1, map, g_map.mc.x, g_map.mc.y);
 	// printf("end fill  . /map numbers\n");
 	return (map);
