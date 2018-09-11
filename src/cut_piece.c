@@ -37,6 +37,8 @@ void	cut_piece()
 	res = (char**)malloc(sizeof(char*) * (len.y + 1));
 	res[len.y] = NULL;
 	tmp.y = -1;
+	g_map.old_pc.x = min.x;
+	g_map.old_pc.y = min.y;
 	while (++tmp.y < len.y)
 	{
 		tmp.x = -1;

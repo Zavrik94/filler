@@ -6,39 +6,11 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 21:27:26 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/10 21:53:01 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/11 19:50:29 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <filler.h>
-
-int		check_enermy_angle(void)
-{
-	int		x;
-	int		y;
-	t_coo	en;
-	int		cnt;
-
-	en.x = 0;
-	en.y = 0;
-	cnt = 0;
-	y = -1;
-	while (g_map.map[++y] && (x = -1) < 0)
-		while (g_map.map[y][++x])
-			if (g_map.map[y][x] == g_map.enmark \
-					|| g_map.map[y][x] == g_map.enmark + 32)
-			{
-				en.x += x;
-				en.y += y;
-				cnt++;
-			}
-	en.x /= cnt;
-	en.y /= cnt;
-	if (y >= (g_map.mc.y - 1) * (en.x - (g_map.mc.x - 1)) / g_map.mc.x)
-		return (0);
-	else
-		return (1);
-}
 
 int		check_dot_map(int **map)
 {
@@ -58,15 +30,22 @@ int		check_dot_map(int **map)
 
 int		cheat_coord(int x, int mc, int status)
 {
-	int		angle;
-
-	angle = check_enermy_angle();
 	if (status == 0)
 	{
-		if (x - 1 <= 0)
-			return (mc + x);
+		if (g_map.enmark == 'o' || g_map.enmark == 'O')
+		{
+			if (x - 1 <= 0)
+				return (0);//(x + mc);
+			else
+				return (mc - 1);//(x - mc);
+		}
 		else
-			return (x - mc);
+		{
+			if (x - 1 <= 0)
+				return (x + mc);
+			else
+				return (x - mc);	
+		}
 	}
 	else
 	{
@@ -161,8 +140,7 @@ int		**fill_map_numbers(void)
 				map[i][x] = 0;
 		}
 	}
-	angle = check_enermy_angle();
-	if (angle == 1)
+	if (g_map.enmark == 'X' || g_map.enmark == 'x')
 	{
 		y = g_map.mc.y;
 		while (--y > -1)

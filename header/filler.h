@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 21:55:12 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/07 19:13:24 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/11 19:27:51 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_map
 {
 	t_coo	mc;
 	t_coo	pc;
+	t_coo	old_pc;
 	char	**map;
 	char	**piece;
 	char	mymark;
