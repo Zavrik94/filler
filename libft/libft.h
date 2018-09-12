@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 20:12:40 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/06 10:34:33 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/12 20:35:44 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char				*ft_normword(char const *s);
 int					ft_cntword(char const *s);
 char				*ft_strrev(char const *s);
 char				ft_itoc(const unsigned char value, const bool is_uppercase);
-char 				*ft_strpart(const char *str, int start, int length);
+char				*ft_strpart(const char *str, int start, int length);
 void				ft_printarr(char **arr);
 char				**ft_copyarr(char **arr);
 void				ft_printnumbarr(int fd, int **arr, int x, int y);

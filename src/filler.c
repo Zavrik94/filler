@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 19:01:38 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/10 21:27:15 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/12 20:38:35 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int		main(void)
 {
 	char *line;
 
-	fd = open("check", O_RDWR);
 	while (get_next_line(0, &line) > 0)
 		if (ft_strstr(line, "Plateau"))
 			input_plat(line);
