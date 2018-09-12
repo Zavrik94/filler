@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 21:27:26 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/11 19:50:29 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/12 19:43:24 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ int		cheat_coord(int x, int mc, int status)
 		if (g_map.enmark == 'o' || g_map.enmark == 'O')
 		{
 			if (x - 1 <= 0)
-				return (0);//(x + mc);
+				return (0);
 			else
-				return (mc - 1);//(x - mc);
+				return (mc - 1);
 		}
 		else
 		{
 			if (x - 1 <= 0)
 				return (x + mc);
 			else
-				return (x - mc);	
+				return (x - mc);
 		}
 	}
 	else
@@ -59,8 +59,7 @@ int		cheat_coord(int x, int mc, int status)
 int		check_around_number(int **map, int x, int y)
 {
 	t_coo	min;
-	int		i;
-	int		c;
+	t_coo	i;
 	int		minn;
 	int		ischange;
 
@@ -68,27 +67,13 @@ int		check_around_number(int **map, int x, int y)
 	min.x = x - 1;
 	minn = 10000000;
 	ischange = 0;
-	i = -1;
+	i.y = -1;
 	if (map[y][x] == 0)
 		return (0);
-	while (++i < 3 && (c = -1) < 0)
-		while (++c < 3)
-			if (map[(min.y + i < 0 || min.y + i >= g_map.mc.y) ? \
-					cheat_coord(min.y + i, g_map.mc.y, 1) : min.y + i]\
-					[(min.x + c < 0 || min.x + c >= g_map.mc.x) ? \
-					cheat_coord(min.x + c, g_map.mc.x, 0) : min.x + c]\
-					< minn && map[(min.y + i < 0 || min.y + i >= \
-						g_map.mc.y) ? cheat_coord(min.y + i, \
-							g_map.mc.y, 1) : min.y + i][(min.x + c < 0 \
-								|| min.x + c >= g_map.mc.x) ? \
-					cheat_coord(min.x + c, g_map.mc.x, 0) : min.x + c] > -1)
-			{
-				ischange = 1;
-				minn = map[(min.y + i < 0 || min.y + i >= g_map.mc.y) ? \
-					cheat_coord(min.y + i, g_map.mc.y, 1) : min.y + i]\
-						[(min.x + c < 0 || min.x + c >= g_map.mc.x) ? \
-						cheat_coord(min.x + c, g_map.mc.x, 0) : min.x + c];
-			}
+	while (++i.y < 3 && (i.x = -1) < 0)
+		while (++i.x < 3)
+			if (if_check(map, min, minn, i) && (ischange = 1) > 0)
+				minn = return_min(map, min, i);
 	if (ischange)
 		return (minn + 1);
 	else
@@ -119,60 +104,28 @@ int		**fill_around_points(int x, int y, int **map)
 int		**fill_map_numbers(void)
 {
 	int		**map;
-	int		i;
-	int		x;
-	int		y;
-	int		angle;
+	t_coo	i;
 
-	map = (int**)malloc(sizeof(int*) * g_map.mc.y + 1);
-	map[g_map.mc.y] = NULL;
-	i = -1;
-	while (g_map.map[++i])
+	map = init_map();
+	if ((g_map.enmark == 'X' || g_map.enmark == 'x') && (i.y = g_map.mc.y) > -1)
 	{
-		x = -1;
-		map[i] = (int*)malloc(sizeof(int) * g_map.mc.x);
-		while (g_map.map[i][++x])
-		{
-			if (g_map.map[i][x] != g_map.enmark && \
-					g_map.map[i][x] != g_map.enmark + 32)
-				map[i][x] = -1;
-			else
-				map[i][x] = 0;
-		}
+		while (--i.y > -1 && (i.x = g_map.mc.x) > -1)
+			while (--i.x > -1)
+				map[i.y][i.x] = check_around_number(map, i.x, i.y);
+		i.y = -1;
+		while (++i.y < g_map.mc.y && (i.x = -1) < 0)
+			while (++i.x < g_map.mc.x)
+				map[i.y][i.x] = check_around_number(map, i.x, i.y);
 	}
-	if (g_map.enmark == 'X' || g_map.enmark == 'x')
+	else if ((i.y = -1) < 0)
 	{
-		y = g_map.mc.y;
-		while (--y > -1)
-		{
-			x = g_map.mc.x;
-			while (--x > -1)
-				map[y][x] = check_around_number(map, x, y);
-		}
-		y = -1;
-		while (++y < g_map.mc.y)
-		{
-			x = -1;
-			while (++x < g_map.mc.x)
-				map[y][x] = check_around_number(map, x, y);
-		}
-	}
-	else
-	{
-		y = -1;
-		while (++y < g_map.mc.y)
-		{
-			x = -1;
-			while (++x < g_map.mc.x)
-				map[y][x] = check_around_number(map, x, y);
-		}
-		y = g_map.mc.y;
-		while (--y > -1)
-		{
-			x = g_map.mc.x;
-			while (--x > -1)
-				map[y][x] = check_around_number(map, x, y);
-		}
+		while (++i.y < g_map.mc.y && (i.x = -1) > 0)
+			while (++i.x < g_map.mc.x)
+				map[i.y][i.x] = check_around_number(map, i.x, i.y);
+		i.y = g_map.mc.y;
+		while (--i.y > -1 && (i.x = g_map.mc.x) > -1)
+			while (--i.x > -1)
+				map[i.y][i.x] = check_around_number(map, i.x, i.y);
 	}
 	return (map);
 }
