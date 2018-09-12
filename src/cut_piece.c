@@ -1,63 +1,84 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cut_piece.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/12 18:52:08 by azavrazh          #+#    #+#             */
+/*   Updated: 2018/09/12 19:02:32 by azavrazh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <filler.h>
 
-void	cut_piece()
+void	search(int *minx, int *miny, int *maxx, int *maxy)
 {
 	t_coo	a;
-	t_coo	min;
-	t_coo	max;
-	t_coo	len;
-	char 	**res;
-	t_coo	tmp;
 
 	a.y = -1;
-	max.x = 0;
-	max.y = 0;
-	min.x = g_map.pc.x;
-	min.y = g_map.pc.y;
-	// ft_printarr(g_map.piece);
+	*maxx = 0;
+	*maxy = 0;
+	*minx = g_map.pc.x;
+	*miny = g_map.pc.y;
 	while (g_map.piece[++a.y])
 	{
 		a.x = -1;
 		while (g_map.piece[a.y][++a.x])
 			if (g_map.piece[a.y][a.x] == '*')
 			{
-				if (a.x < min.x)
-					min.x = a.x;
-				if (a.y < min.y)
-					min.y = a.y;
-				if (a.x > max.x)
-					max.x = a.x;
-				if (a.y > max.y)
-					max.y = a.y;
+				if (a.x < *minx)
+					*minx = a.x;
+				if (a.y < *miny)
+					*miny = a.y;
+				if (a.x > *maxx)
+					*maxx = a.x;
+				if (a.y > *maxy)
+					*maxy = a.y;
 			}
 	}
-	len.y = max.y - min.y + 1;
-	len.x = max.x - min.x + 1;
-	// printf("mix = %d miny = %d maxx = %d maxy = %d x = %d y = %d\n",min.x, min.y, max.x, max.y, len.x, len.y);
-	res = (char**)malloc(sizeof(char*) * (len.y + 1));
-	res[len.y] = NULL;
+}
+
+char	**for_res(t_coo min, t_coo max, t_coo len)
+{
+	t_coo	tmp;
+	char	**res;
+
 	tmp.y = -1;
-	g_map.old_pc.x = min.x;
-	g_map.old_pc.y = min.y;
 	while (++tmp.y < len.y)
 	{
 		tmp.x = -1;
 		min.x = max.x - len.x + 1;
 		res[tmp.y] = (char*)malloc(sizeof(char) * (len.x + 1));
-		res[tmp.y][len.x] = '\0';  
+		res[tmp.y][len.x] = '\0';
 		while (++tmp.x < len.x)
 		{
-			// printf("%c", g_map.piece[min.y][min.x]);
 			res[tmp.y][tmp.x] = g_map.piece[min.y][min.x];
 			min.x++;
 		}
-		// printf("\n");
 		min.y++;
 	}
+	return (res);
+}
+
+void	cut_piece(void)
+{
+	t_coo	min;
+	t_coo	max;
+	t_coo	len;
+	char	**res;
+
+	search(&min.x, &min.y, &max.x, &max.y);
+	len.y = max.y - min.y + 1;
+	len.x = max.x - min.x + 1;
+	res = (char**)malloc(sizeof(char*) * (len.y + 1));
+	res[len.y] = NULL;
+	g_map.old_pc.x = min.x;
+	g_map.old_pc.y = min.y;
+	res = for_res(min, max, len);
 	free(g_map.piece);
 	g_map.piece = ft_copyarr(res);
 	free(res);
-	// ft_printarr(g_map.piece);
 	g_map.pc.x = len.x;
 	g_map.pc.y = len.y;
 }

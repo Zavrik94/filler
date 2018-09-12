@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 21:01:01 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/12 18:36:31 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/12 18:51:35 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,8 @@ void	findpos(void)
 		x = -1;
 		while (g_map.map[y][++x])
 			if ((g_map.map[y][x] == g_map.mymark || \
-					g_map.map[y][x] == (g_map.mymark + 32)) &&  check_around_dots(x, y))
+					g_map.map[y][x] == (g_map.mymark + 32)) &&\
+					check_around_dots(x, y))
 				check_around_point(x, y);
 	}
 }
