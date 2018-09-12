@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 21:01:01 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/11 20:50:01 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/12 18:36:31 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,25 @@ void	check_around_point(int x, int y)
 	}
 }
 
+int		check_around_dots(int x, int y)
+{
+	t_coo	min;
+	int		i;
+	int		c;
+
+	min.y = y - 1;
+	min.x = x - 1;
+	i = -1;
+	while (++i < 3 && (c = -1) < 0)
+		while (++c < 3)
+			if (g_map.map[(min.y + i < 0 || min.y + i >= g_map.mc.y) ? \
+					cheat_coord(min.y + i, g_map.mc.y, 1) : min.y + i]\
+					[(min.x + c < 0 || min.x + c >= g_map.mc.x) ? \
+					cheat_coord(min.x + c, g_map.mc.x, 0) : min.x + c] == '.')
+				return (1);
+	return (0);
+}
+
 void	findpos(void)
 {
 	int		x;
@@ -126,8 +145,8 @@ void	findpos(void)
 	{
 		x = -1;
 		while (g_map.map[y][++x])
-			if (g_map.map[y][x] == g_map.mymark || \
-					g_map.map[y][x] == (g_map.mymark + 32))
+			if ((g_map.map[y][x] == g_map.mymark || \
+					g_map.map[y][x] == (g_map.mymark + 32)) &&  check_around_dots(x, y))
 				check_around_point(x, y);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 21:55:12 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/11 19:27:51 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/12 18:37:05 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	cut_piece(void);
 int		start_input(void);
 void	filler_algo(void);
 int		**fill_map_numbers(void);
+int		cheat_coord(int x, int mc, int status);
 
 
 typedef struct s_coordinates t_coo;
