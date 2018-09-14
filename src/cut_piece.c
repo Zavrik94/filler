@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 18:52:08 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/12 19:02:32 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/13 13:28:15 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	**for_res(t_coo min, t_coo max, t_coo len)
 		}
 		min.y++;
 	}
+	free(g_map.piece);
 	return (res);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azavrazh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 20:37:53 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/03/19 20:37:55 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/14 14:31:48 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int			pars(char *inp, char **out, t_files *list)
 		return (0);
 	if (list->temp != NULL && list->temp[0] == '\0')
 	{
+		ft_strdel(&list->temp);
 		list->temp = NULL;
 		return (0);
 	}
@@ -37,7 +38,10 @@ int			pars(char *inp, char **out, t_files *list)
 	if (i == (int)ft_strlen(inp))
 		list->temp = NULL;
 	else
+	{
+		ft_strdel(&list->temp);
 		list->temp = ft_strsub(inp, i + 1, ft_strlen(inp) - 1);
+	}
 	return (1);
 }
 
@@ -78,9 +82,9 @@ int			algo(int fd, char **line, t_files *list)
 	buff = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
 	while ((i = read(fd, buff, BUFF_SIZE)) > 0)
 	{
-		buff[i] = 0;
 		if (i < 0)
 			return (-1);
+		buff[i] = 0;
 		if ((chk = pars(buff, line, list)) >= 0)
 			if (ft_strchr(buff, '\n'))
 			{

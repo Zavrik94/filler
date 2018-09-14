@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 20:12:40 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/12 20:35:44 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/14 10:38:25 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ void				ft_printarr(char **arr);
 char				**ft_copyarr(char **arr);
 void				ft_printnumbarr(int fd, int **arr, int x, int y);
 void				ft_printarr_fd(int fd, char **arr);
+char				*ft_strscpy(char *str, int start);
 
 #endif

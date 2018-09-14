@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 21:55:12 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/12 20:38:16 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/13 13:27:03 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int				if_check(int **map, t_coo min, int minn, t_coo i);
 int				return_min(int **map, t_coo min, t_coo i);
 int				can_put_it(int x, int y);
 int				calculate_piece(int x, int y);
+void			free_all(void);
 
 struct			s_coordinates
 {

@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 19:01:38 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/12 20:38:35 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/14 10:11:49 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ void	input_plat(char *line)
 		else if (line[i] == ' ')
 			g_map.mc.x = ft_atoi(line + i);
 	g_map.map = (char**)malloc(sizeof(char*) * (g_map.mc.y + 1));
+	ft_strdel(&line);
 	get_next_line(0, &line);
+	ft_strdel(&line);
 	g_map.map[g_map.mc.y] = NULL;
 	i = -1;
 	while (++i < g_map.mc.y)
 	{
 		get_next_line(0, &line);
-		g_map.map[i] = line + 4;
+		g_map.map[i] = ft_strscpy(line, 4);
+		ft_strdel(&line);
 	}
 }
 
@@ -51,7 +54,8 @@ void	input_piece(char *line)
 	while (++i < g_map.pc.y)
 	{
 		get_next_line(0, &line);
-		g_map.piece[i] = line;
+		g_map.piece[i] = ft_strscpy(line, 0);
+		ft_strdel(&line);
 	}
 }
 
@@ -60,6 +64,7 @@ int		main(void)
 	char *line;
 
 	while (get_next_line(0, &line) > 0)
+	{
 		if (ft_strstr(line, "Plateau"))
 			input_plat(line);
 		else if (ft_strstr(line, "Piece"))
@@ -79,6 +84,10 @@ int		main(void)
 				g_map.mymark = 'X';
 				g_map.enmark = 'O';
 			}
+			ft_strdel(&line);
 		}
+		else
+			ft_strdel(&line);
+	}
 	return (0);
 }

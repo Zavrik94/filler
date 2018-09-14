@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 21:01:01 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/12 19:48:50 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/14 09:53:43 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	filler_algo(void)
 	g_num_map = fill_map_numbers();
 	g_map.bestsum = sum_all_map();
 	findpos();
+	free_all();
 	ft_putnbr(g_map.best.y - g_map.old_pc.y);
 	ft_putchar(' ');
 	ft_putnbr(g_map.best.x - g_map.old_pc.x);

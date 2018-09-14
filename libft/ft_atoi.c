@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azavrazh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 18:32:04 by azavrazh          #+#    #+#             */
-/*   Updated: 2017/12/07 18:32:13 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/14 10:07:51 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	ft_atoi(const char *str)
 	long long int	res;
 
 	res = 0;
-	while (*str == ' ' || *str == '\t' || *str == '\n'
+	f = 0;
+	while (*str == ' ' || *str == '\t' || *str == '\n'\
 			|| *str == '\v' || *str == '\f' || *str == '\r')
 		str++;
 	if (*str == '+' || *str == '-')
