@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 19:01:38 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/17 10:51:01 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 16:31:36 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	input_plat(char *line)
 			g_map.mc.x = ft_atoi(line + i);
 	g_map.map = (char**)malloc(sizeof(char*) * (g_map.mc.y + 1));
 	ft_strdel(&line);
-	get_next_line(0, &line);
+	get_next_line(fd, &line);
 	ft_strdel(&line);
 	g_map.map[g_map.mc.y] = NULL;
 	i = -1;
 	while (++i < g_map.mc.y)
 	{
-		get_next_line(0, &line);
+		get_next_line(fd, &line);
 		g_map.map[i] = ft_strscpy(line, 4);
 		ft_strdel(&line);
 	}
@@ -56,7 +56,7 @@ void	input_piece(char *line)
 	ft_strdel(&line);
 	while (++i < g_map.pc.y)
 	{
-		get_next_line(0, &line);
+		get_next_line(fd, &line);
 		g_map.piece[i] = ft_strscpy(line, 0);
 		ft_strdel(&line);
 	}
@@ -66,7 +66,8 @@ int		main(void)
 {
 	char *line;
 
-	while (get_next_line(0, &line) > 0)
+	fd = 0;//open("test", O_RDONLY);
+	while (get_next_line(fd, &line) > 0)
 	{
 		if (ft_strstr(line, "Plateau"))
 			input_plat(line);

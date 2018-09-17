@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 20:37:53 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/17 10:47:09 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 16:05:50 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,11 @@ int			pars(char *inp, char **out, t_files *list)
 	*out = ft_strjoin(t[0], t[1]);
 	ft_strdel(&t[0]);
 	ft_strdel(&t[1]);
-	if (i == (int)ft_strlen(inp))
-		ft_strdel(&list->temp);
-	else
-	{
-		t[0] = ft_strdup(inp);
-		ft_strdel(&list->temp);
+	t[0] = ft_strdup(inp);
+	ft_strdel(&list->temp);
+	if (i != (int)ft_strlen(t[0]))
 		list->temp = ft_strsub(t[0], i + 1, ft_strlen(t[0]) - 1);
-		ft_strdel(&t[0]);
-	}
+	ft_strdel(&t[0]);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 21:55:12 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/13 09:50:12 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/14 18:44:28 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include <ncurses.h>
+# include <stdio.h>
 # include <time.h>
 
 typedef struct	s_coordinates
@@ -30,6 +31,9 @@ typedef struct	s_map
 	char	**map;
 	t_coo	pc;
 	char	**piece;
+	t_coo	fin;
+	char	*o;
+	char	*x;
 
 	WINDOW	*m;
 	WINDOW	*p;

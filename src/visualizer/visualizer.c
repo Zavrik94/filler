@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visualizer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: vbrazas <vbrazas@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 19:37:51 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/14 18:57:19 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 15:36:52 by vbrazas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,5 @@ int						main(void)
 	}
 	endwin();
 	print_winner(&m);
-	system("leaks -q visualizer");
 	return (0);
 }
