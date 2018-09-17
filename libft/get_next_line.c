@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 20:37:53 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/14 14:31:48 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 10:47:09 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int			pars(char *inp, char **out, t_files *list)
 	if (list->temp != NULL && list->temp[0] == '\0')
 	{
 		ft_strdel(&list->temp);
-		list->temp = NULL;
 		return (0);
 	}
 	i = -1;
@@ -36,11 +35,13 @@ int			pars(char *inp, char **out, t_files *list)
 	ft_strdel(&t[0]);
 	ft_strdel(&t[1]);
 	if (i == (int)ft_strlen(inp))
-		list->temp = NULL;
+		ft_strdel(&list->temp);
 	else
 	{
+		t[0] = ft_strdup(inp);
 		ft_strdel(&list->temp);
-		list->temp = ft_strsub(inp, i + 1, ft_strlen(inp) - 1);
+		list->temp = ft_strsub(t[0], i + 1, ft_strlen(t[0]) - 1);
+		ft_strdel(&t[0]);
 	}
 	return (1);
 }
@@ -73,6 +74,24 @@ t_files		*find(int fd, t_files *list, int status)
 	}
 }
 
+void		free_fd_list(int fd, t_files *list)
+{
+	t_files	*buff;
+
+	while (list)
+	{
+		if (list->fd == fd)
+		{
+			buff = list->next;
+			free(list);
+			list = buff;
+			free(buff);
+		}
+		else
+			list = list->next;
+	}
+}
+
 int			algo(int fd, char **line, t_files *list)
 {
 	int		i;
@@ -82,9 +101,9 @@ int			algo(int fd, char **line, t_files *list)
 	buff = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
 	while ((i = read(fd, buff, BUFF_SIZE)) > 0)
 	{
+		buff[i] = 0;
 		if (i < 0)
 			return (-1);
-		buff[i] = 0;
 		if ((chk = pars(buff, line, list)) >= 0)
 			if (ft_strchr(buff, '\n'))
 			{
@@ -116,11 +135,12 @@ int			get_next_line(const int fd, char **line)
 	i = algo(fd, line, list);
 	if (i == -1)
 	{
-		free(*line);
+		ft_strdel(line);
 		return (-1);
 	}
 	else if ((i == 0 && ft_strcmp(*line, "\0")) || i == 1)
 		return (1);
-	free(*line);
+	ft_strdel(line);
+	free_fd_list(fd, head);
 	return (0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+         #
+#    By: vbrazas <vbrazas@student.unit.ua>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/03 19:38:02 by azavrazh          #+#    #+#              #
-#    Updated: 2018/09/13 10:03:26 by azavrazh         ###   ########.fr        #
+#    Updated: 2018/09/13 05:23:52 by vbrazas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

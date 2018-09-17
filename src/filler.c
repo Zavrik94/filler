@@ -6,11 +6,13 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 19:01:38 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/14 10:11:49 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 10:51:01 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <filler.h>
+
+int		fd;
 
 void	input_plat(char *line)
 {
@@ -51,6 +53,7 @@ void	input_piece(char *line)
 	g_map.piece = (char**)malloc(sizeof(char*) * (g_map.pc.y + 1));
 	g_map.piece[g_map.pc.y] = NULL;
 	i = -1;
+	ft_strdel(&line);
 	while (++i < g_map.pc.y)
 	{
 		get_next_line(0, &line);

@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 19:37:51 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/13 09:49:41 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/14 18:57:19 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,15 @@ static inline void		visualize_map(t_map *m)
 	usleep(30000);
 }
 
+static inline void		print_winner(t_map *m)
+{
+	ft_putstr("Player \'");
+	ft_putchar((m->fin.x > m->fin.y) ? 'X' : 'O');
+	ft_putstr("\' win!!!\nWith ");
+	ft_putnbr((m->fin.x > m->fin.y) ? m->fin.x : m->fin.y);
+	ft_putstr(" win points\n");
+}
+
 int						main(void)
 {
 	t_map	m;
@@ -116,8 +125,14 @@ int						main(void)
 			input_piece1(line, &m);
 			visualize_piece(&m);
 		}
+		else if ((m.o = ft_strstr(line, "== O fin: ")))
+			m.fin.y = ft_atoi(m.o + 9);
+		else if ((m.x = ft_strstr(line, "== X fin: ")))
+			m.fin.x = ft_atoi(m.x + 9);
 		free(line);
 	}
 	endwin();
+	print_winner(&m);
+	system("leaks -q visualizer");
 	return (0);
 }

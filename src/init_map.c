@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 19:28:54 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/14 10:25:14 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 09:38:38 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int		**init_map(void)
 	int		**map;
 
 	map = (int**)malloc(sizeof(int*) * (g_map.mc.y + 1));
-	printf("%d\n", g_map.mc.y);
 	map[g_map.mc.y] = NULL;
 	i.y = -1;
 	while (g_map.map[++i.y])
