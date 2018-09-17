@@ -6,20 +6,22 @@
 #    By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/03 19:38:02 by azavrazh          #+#    #+#              #
-#    Updated: 2018/09/13 13:34:32 by azavrazh         ###   ########.fr        #
+#    Updated: 2018/09/17 23:49:06 by azavrazh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := azavrazh.filler
+VIS := visualizer
 
 SRC_D := src/
+VIS_D := $(SRC_D)visualizer/
 LIBFT_D := libft/
 LIBFT := $(LIBFT_D)libft.a
 INC_D := header/
 OBJ_D := .obj/
 
 CC := clang
-CFLAGS := -g #-Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror
 IFLAGS := -I $(INC_D)
 
 SRC := filler algo work_with_map cut_piece init_map can_put_it free
@@ -29,21 +31,9 @@ SRCS := $(addprefix $(SRC_D), $(addsuffix .c, $(SRC)))
 OBJS := $(addprefix $(OBJ_D), $(SRCS:%.c=%.o))
 
 
-
-VNAME := azavrazh.vis
-VSRCS := visualizer.c vutils.c
-VHFILES := $(INC_D)filler.h $(INC_D)visualaizer.h
-VDIR := visualaizer/
-VSRCS := $(addprefix $(VDIR), $(addsuffix .c, $(VIS)))
-VOBJS := $(addprefix $(OBJ_D), $(SRCS:%.c=%.o))
-
-
 all: $(NAME)
-
-vis: $(VNAME)
-
-$(VNAME): $(LIBFT) $(OBJ_D) $(VOBJS)
-	$(CC) $(CFLAGS) $(IFLAGS) $(VOBJS) $(LIBFT) -lncurses -o $(VNAME)
+	make -C $(VIS_D)
+	cp $(VIS_D)$(VIS) .
 
 $(NAME): $(LIBFT) $(OBJ_D) $(OBJS)
 	$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
@@ -63,11 +53,12 @@ fclean: mfclean
 re: fclean all
 
 mclean:
-	rm -f $(OBJS)
-mfclean:
-	rm -f $(NAME)
-	rm -f $(VNAME)
 	rm -rf $(OBJ_D)
+	rm -rf $(VIS_D)$(OBJ_D)
+mfclean: mclean
+	rm -f $(NAME)
+	rm -f $(VIS)
+	rm -f $(VIS_D)$(VIS)
 mre: mfclean all
 
 .PHONY: all clean fclean re mclean mfclean mre

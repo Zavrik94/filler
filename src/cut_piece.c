@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 18:52:08 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/13 13:28:15 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 23:38:45 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	**for_res(t_coo min, t_coo max, t_coo len)
 	char	**res;
 
 	tmp.y = -1;
+	res = (char**)malloc(sizeof(char*) * (len.y + 1));
+	res[len.y] = NULL;
 	while (++tmp.y < len.y)
 	{
 		tmp.x = -1;
@@ -72,8 +74,6 @@ void	cut_piece(void)
 	search(&min.x, &min.y, &max.x, &max.y);
 	len.y = max.y - min.y + 1;
 	len.x = max.x - min.x + 1;
-	res = (char**)malloc(sizeof(char*) * (len.y + 1));
-	res[len.y] = NULL;
 	g_map.old_pc.x = min.x;
 	g_map.old_pc.y = min.y;
 	res = for_res(min, max, len);

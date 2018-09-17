@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 21:55:12 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/14 18:44:28 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 23:56:28 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct	s_map
 
 }				t_map;
 
-enum	pcolors
+enum			e_pcolors
 {
 	P1 = 10,
 	P2,
@@ -51,5 +51,6 @@ enum	pcolors
 void			init_vis(t_map *m);
 void			input_plat1(char *line, t_map *m);
 void			input_piece1(char *line, t_map *m);
+void			print_winner(t_map *m);
 
 #endif

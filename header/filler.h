@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 21:55:12 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/13 13:27:03 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 23:49:29 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,6 @@
 # define CHEAT(x, map) ((x) < 0) || (x) >= (map) ? (CHEAT2((x), (map))) : (x)
 
 typedef struct s_coordinates	t_coo;
-
-int				**init_map(void);
-void			cut_piece(void);
-int				start_input(void);
-void			filler_algo(void);
-int				**fill_map_numbers(void);
-int				cheat_coord(int x, int mc, int status);
-int				if_check(int **map, t_coo min, int minn, t_coo i);
-int				return_min(int **map, t_coo min, t_coo i);
-int				can_put_it(int x, int y);
-int				calculate_piece(int x, int y);
-void			free_all(void);
 
 struct			s_coordinates
 {
@@ -50,6 +38,18 @@ typedef struct	s_map
 	t_coo		best;
 	int			bestsum;
 }				t_map;
+
+int				**init_map(void);
+void			cut_piece(void);
+int				start_input(void);
+void			filler_algo(void);
+int				**fill_map_numbers(void);
+int				cheat_coord(int x, int mc, int status);
+int				if_check(int **map, t_coo min, int minn, t_coo i);
+int				return_min(int **map, t_coo min, t_coo i);
+int				can_put_it(int x, int y);
+int				calculate_piece(int x, int y);
+void			free_all(void);
 
 t_map			g_map;
 int				**g_num_map;

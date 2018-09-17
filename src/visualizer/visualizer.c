@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visualizer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbrazas <vbrazas@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 19:37:51 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/17 15:36:52 by vbrazas          ###   ########.fr       */
+/*   Updated: 2018/09/17 23:55:26 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static inline void		visualize_piece(t_map *m)
 	const int	width = m->mc.x / 2;
 
 	if (m->p == NULL)
-		m->p = newwin(height, width, 2, COLS / 2 + m->mc.x);
+		m->p = newwin(height, width, 0, COLS / 2 + m->mc.x);
 	clear_window(m->p, height, width);
 	y = -1;
 	while (m->piece[++y])
@@ -82,7 +82,7 @@ static inline void		visualize_map(t_map *m)
 	int			y;
 
 	if (m->m == NULL)
-		m->m = newwin(m->mc.y, m->mc.x * 2, 2, COLS / 2 - m->mc.x);
+		m->m = newwin(m->mc.y, m->mc.x * 2, 0, COLS / 2 - m->mc.x);
 	y = -1;
 	while (m->map[++y])
 	{
@@ -96,15 +96,6 @@ static inline void		visualize_map(t_map *m)
 	box(m->m, 0, 0);
 	wrefresh(m->m);
 	usleep(30000);
-}
-
-static inline void		print_winner(t_map *m)
-{
-	ft_putstr("Player \'");
-	ft_putchar((m->fin.x > m->fin.y) ? 'X' : 'O');
-	ft_putstr("\' win!!!\nWith ");
-	ft_putnbr((m->fin.x > m->fin.y) ? m->fin.x : m->fin.y);
-	ft_putstr(" win points\n");
 }
 
 int						main(void)

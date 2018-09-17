@@ -6,13 +6,11 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 19:01:38 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/17 16:31:36 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 23:55:28 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <filler.h>
-
-int		fd;
 
 void	input_plat(char *line)
 {
@@ -27,13 +25,13 @@ void	input_plat(char *line)
 			g_map.mc.x = ft_atoi(line + i);
 	g_map.map = (char**)malloc(sizeof(char*) * (g_map.mc.y + 1));
 	ft_strdel(&line);
-	get_next_line(fd, &line);
+	get_next_line(0, &line);
 	ft_strdel(&line);
 	g_map.map[g_map.mc.y] = NULL;
 	i = -1;
 	while (++i < g_map.mc.y)
 	{
-		get_next_line(fd, &line);
+		get_next_line(0, &line);
 		g_map.map[i] = ft_strscpy(line, 4);
 		ft_strdel(&line);
 	}
@@ -56,7 +54,7 @@ void	input_piece(char *line)
 	ft_strdel(&line);
 	while (++i < g_map.pc.y)
 	{
-		get_next_line(fd, &line);
+		get_next_line(0, &line);
 		g_map.piece[i] = ft_strscpy(line, 0);
 		ft_strdel(&line);
 	}
@@ -66,32 +64,22 @@ int		main(void)
 {
 	char *line;
 
-	fd = 0;//open("test", O_RDONLY);
-	while (get_next_line(fd, &line) > 0)
-	{
+	while (get_next_line(0, &line) > 0)
 		if (ft_strstr(line, "Plateau"))
 			input_plat(line);
 		else if (ft_strstr(line, "Piece"))
 		{
 			input_piece(line);
+			ft_bzero(&g_map.best, sizeof(t_coo));
 			filler_algo();
 		}
 		else if (ft_strstr(line, "azavrazh"))
 		{
-			if (ft_strstr(line, "p1"))
-			{
-				g_map.mymark = 'O';
-				g_map.enmark = 'X';
-			}
-			else if ((ft_strstr(line, "p2")))
-			{
-				g_map.mymark = 'X';
-				g_map.enmark = 'O';
-			}
+			g_map.enmark = (ft_strstr(line, "p1")) ? 'X' : 'O';
+			g_map.mymark = (ft_strstr(line, "p1")) ? 'O' : 'X';
 			ft_strdel(&line);
 		}
 		else
 			ft_strdel(&line);
-	}
 	return (0);
 }

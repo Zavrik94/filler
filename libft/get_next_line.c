@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 20:37:53 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/17 16:05:50 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 23:20:39 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ int			pars(char *inp, char **out, t_files *list)
 	int		i;
 	char	*t[2];
 
-	if (inp == NULL)
-		return (0);
 	if (list->temp != NULL && list->temp[0] == '\0')
-	{
 		ft_strdel(&list->temp);
+	if (inp == NULL || (list->temp != NULL && list->temp[0] == '\0'))
 		return (0);
-	}
 	i = -1;
 	while (inp[++i])
 		if (inp[i] == '\n')

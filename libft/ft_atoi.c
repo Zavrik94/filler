@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 18:32:04 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/14 10:07:51 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 23:22:07 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ int	ft_atoi(const char *str)
 	{
 		res = res * 10 + *str - 48;
 		str++;
-		if (res > 2147483648 && f == 1)
-			return (-1);
-		else if (res > 2147483648 && f == -1)
-			return (0);
 	}
 	return (f == -1 ? -res : res);
 }

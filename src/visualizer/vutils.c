@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vutils.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbrazas <vbrazas@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/13 05:25:21 by vbrazas           #+#    #+#             */
-/*   Updated: 2018/09/13 05:25:22 by vbrazas          ###   ########.fr       */
+/*   Updated: 2018/09/17 23:53:54 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		input_plat1(char *line, t_map *m)
 	if (m->map == NULL)
 		m->map = (char**)ft_memalloc(sizeof(char*) * (m->mc.y + 1));
 	get_next_line(0, &line);
+	free(line);
 	m->map[m->mc.y] = NULL;
 	i = -1;
 	while (++i < m->mc.y)
@@ -80,4 +81,13 @@ void		init_vis(t_map *m)
 	init_pair(P2, COLOR_GREEN, COLOR_BLACK);
 	init_pair(STAR, COLOR_MAGENTA, COLOR_BLACK);
 	init_pair(NEU, COLOR_BLACK, COLOR_BLACK);
+}
+
+void		print_winner(t_map *m)
+{
+	ft_putstr("Player \'");
+	ft_putchar((m->fin.x > m->fin.y) ? 'X' : 'O');
+	ft_putstr("\' win!!!\nWith ");
+	ft_putnbr((m->fin.x > m->fin.y) ? m->fin.x : m->fin.y);
+	ft_putstr(" win points\n");
 }

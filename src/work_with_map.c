@@ -6,7 +6,7 @@
 /*   By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 21:27:26 by azavrazh          #+#    #+#             */
-/*   Updated: 2018/09/17 16:30:13 by azavrazh         ###   ########.fr       */
+/*   Updated: 2018/09/17 23:11:00 by azavrazh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,12 @@ int		**fill_map_numbers(void)
 
 	map = init_map();
 	while (check_dot_map(map))
-		if ((g_map.enmark == 'X' || g_map.enmark == 'x') && (i.y = g_map.mc.y) > -1)
+		if ((g_map.enmark == 'X' || g_map.enmark == 'x')
+		&& (i.y = g_map.mc.y) > -1)
 		{
 			while (--i.y > -1 && (i.x = g_map.mc.x) > -1)
 				while (--i.x > -1)
 					map[i.y][i.x] = check_around_number(map, i.x, i.y);
-			i.y = -1;
 			while (++i.y < g_map.mc.y && (i.x = -1) < 0)
 				while (++i.x < g_map.mc.x)
 					map[i.y][i.x] = check_around_number(map, i.x, i.y);
@@ -123,7 +123,6 @@ int		**fill_map_numbers(void)
 			while (++i.y < g_map.mc.y && (i.x = -1) > 0)
 				while (++i.x < g_map.mc.x)
 					map[i.y][i.x] = check_around_number(map, i.x, i.y);
-			i.y = g_map.mc.y;
 			while (--i.y > -1 && (i.x = g_map.mc.x) > -1)
 				while (--i.x > -1)
 					map[i.y][i.x] = check_around_number(map, i.x, i.y);
