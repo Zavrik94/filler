@@ -120,7 +120,7 @@ int		**fill_map_numbers(void)
 		}
 		else if ((i.y = -1) < 0)
 		{
-			while (++i.y < g_map.mc.y && (i.x = -1) > 0)
+			while (++i.y < g_map.mc.y && (i.x = -1) < 0)
 				while (++i.x < g_map.mc.x)
 					map[i.y][i.x] = check_around_number(map, i.x, i.y);
 			while (--i.y > -1 && (i.x = g_map.mc.x) > -1)
