@@ -83,7 +83,7 @@ wait_for_all()
 }
 sychronize()
 {
-	magic_num="1"
+	magic_num="$1"
 	proc_num=$(pgrep ruby | wc -l)
 	formula_num=$(echo $(echo $MAPS | wc -w) \* $NUM_TESTS \* 2 \* $magic_num - 1 | bc | cut -d. -f1)
 	if [[ $proc_num -gt $formula_num ]];
@@ -106,7 +106,7 @@ do
 			./filler_vm -f ${MAPS_D}$mapname -p1 $MY_FILLER -p2 ${PLAYERS_D}${pname}.filler | grep "==" >> ${TEST_D}${pname}_${mapname}_p1 &
 			echo "Testing -p2 $MY_FILLER -p1 players/${pname}.filler ON $mapname"
 			./filler_vm -f ${MAPS_D}$mapname -p2 $MY_FILLER -p1 ${PLAYERS_D}${pname}.filler | grep "==" >> ${TEST_D}${pname}_${mapname}_p2 &
-			sychronize
+			sychronize $1
 		done
 	done
 done
