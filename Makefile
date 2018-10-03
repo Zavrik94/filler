@@ -6,12 +6,12 @@
 #    By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/03 19:38:02 by azavrazh          #+#    #+#              #
-#    Updated: 2018/09/17 23:49:06 by azavrazh         ###   ########.fr        #
+#    Updated: 2018/10/03 19:57:19 by azavrazh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := azavrazh.filler
-VIS := visualizer
+VIS := azavrazh.vis
 
 SRC_D := src/
 VIS_D := $(SRC_D)visualizer/

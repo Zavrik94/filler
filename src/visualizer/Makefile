@@ -6,11 +6,11 @@
 #    By: azavrazh <azavrazh@student.unit.ua>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/03 19:38:02 by azavrazh          #+#    #+#              #
-#    Updated: 2018/09/17 23:48:38 by azavrazh         ###   ########.fr        #
+#    Updated: 2018/10/03 19:57:37 by azavrazh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := visualizer
+NAME := azavrazh.vis
 
 LIBFT_D := ../../libft/
 LIBFT := $(LIBFT_D)libft.a
